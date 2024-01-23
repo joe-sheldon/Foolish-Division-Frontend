@@ -15,6 +15,8 @@ function App() {
     setIsLoading(true)
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://api.foolish-division.com/api/status/ok/')
+    xhr.timeout = 5000
+
     xhr.onload = () => {
       if(xhr.status === 200) {
         setServerUp(true)
@@ -23,10 +25,16 @@ function App() {
       }
       setIsLoading(false)
     }
+
+    xhr.ontimeout = (e) => {
+      setIsLoading(false)
+      setServerUp(false)
+    }
+
     xhr.send()
   }
 
-  const BackendStatus = (isBackendUp) => {
+  const BackendStatus = ({isBackendUp, isLoading}) => {
     if (isLoading) {
       return <p>Checking on Backend...</p>
     }
@@ -53,7 +61,7 @@ function App() {
         >
           GitHub Repo
         </a>
-        <BackendStatus isBackendUp={isServerUp}/>
+        <BackendStatus isBackendUp={isServerUp} isLoading={isLoading}/>
       </header>
     </div>
   );
