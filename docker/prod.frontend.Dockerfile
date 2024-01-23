@@ -14,7 +14,7 @@ RUN chmod +x /startup-frontend.sh
 COPY . /app
 
 # Install Node Modules
-RUN cd /app/frontend && npm install
+RUN cd /app && npm install
 
 # Expose Frontend and Backend
 EXPOSE 80
