@@ -14,7 +14,7 @@ function App() {
   const handleRequest = () => {
     setIsLoading(true)
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://foolish-division.onrender.com/api/status/ok/')
+    xhr.open('GET', 'https://api.foolish-division.com/api/status/ok/')
     xhr.onload = () => {
       if(xhr.status === 200) {
         setServerUp(true)
