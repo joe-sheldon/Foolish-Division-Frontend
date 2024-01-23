@@ -42,9 +42,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Splitwise got greedy. We're starting this to provide a free, open source alternative.
+          In our opinion, Splitwise got greedy. We're starting this to provide a free, open source alternative for shared expenses.
         </p>
         <a
           className="App-link"
