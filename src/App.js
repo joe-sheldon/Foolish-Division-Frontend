@@ -1,7 +1,44 @@
-import logo from './public/logo.jpeg';
+import logo from './logo.svg';
 import './App.css';
+import {useEffect, useState} from "react";
 
 function App() {
+
+  const [isServerUp, setServerUp] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    handleRequest()
+  }, [])
+
+  const handleRequest = () => {
+    setIsLoading(true)
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://foolish-division.onrender.com/api/test')
+    xhr.onload = () => {
+      if(xhr.status === 200) {
+        setServerUp(true)
+      } else {
+        setServerUp(false)
+      }
+      setIsLoading(false)
+    }
+    xhr.send()
+  }
+
+  const BackendStatus = (isBackendUp) => {
+    if (isLoading) {
+      return <p>Checking on Backend...</p>
+    }
+    else if (isBackendUp) {
+      return (
+          <p>Backend is UP!</p>
+      )
+    }
+
+    return (<p>Backend is DOWN!</p>)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +54,7 @@ function App() {
         >
           GitHub Repo
         </a>
+        <BackendStatus isBackendUp={isServerUp}/>
       </header>
     </div>
   );
